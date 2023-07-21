@@ -57,3 +57,9 @@ ChatGPTなどAIサービスの利用は禁止しておりません。
 また、弊社コードチェック担当者もAIサービスを利用させていただく場合があります。
 
 AIサービスの利用は差し控えてもらいたいなどのご要望がある場合は、お気軽にお申し出ください。
+
+
+## clone で出くわしたエラー
+workflow の yml ファイルがあると権限がないと言われ、push できなかった。  
+ssh key を追加して、push --mirror git@~ のように、URL ではなく ssh を使うことで解決。  
+https://github.com/waigoma/yumemi-android-codecheck.git

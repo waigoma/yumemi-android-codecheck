@@ -62,4 +62,10 @@ AIサービスの利用は差し控えてもらいたいなどのご要望があ
 ## clone で出くわしたエラー
 workflow の yml ファイルがあると権限がないと言われ、push できなかった。  
 ssh key を追加して、push --mirror git@~ のように、URL ではなく ssh を使うことで解決。  
-https://github.com/waigoma/yumemi-android-codecheck.git
+https://qiita.com/masato_makino/items/93c4429cdb4d54c007c7
+
+
+## Android Studio でプロジェクトを開いたときに出くわしたエラー
+`No matching variant of com.android.tools.build:gradle`  
+File > Setting > Build, Execution, Deployment > Build Tools > Gradle の JDK のバージョンを上げることで解決。
+https://qiita.com/kotlinObasan/items/0193f7676a97071b5f2a

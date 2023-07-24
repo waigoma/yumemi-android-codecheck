@@ -13,7 +13,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.HttpResponse
-import jp.co.yumemi.android.codecheck.TopActivity.Companion.lastSearchDate
+import jp.co.yumemi.android.codecheck.MainActivity.Companion.lastSearchDate
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking

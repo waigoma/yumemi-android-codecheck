@@ -32,6 +32,10 @@ item クラスを Item と名前を変更した際、android studio の refactor
 res > navigation > nav_graph.xml にある item を Item に変更する必要があり、変更したら解決した。  
 https://stackoverflow.com/questions/64221874/unresolved-references-in-automatically-generated-files-android-studio-kotlin
 
+## fragment の名前と navigation の名前変えたらエラー
+fragment ファイルの名前を変更し、それに対応する kt ファイル内のクラス名と、navigation の名前を変更したらエラー。  
+どうしてエラーが出て直ったのかは不明だが、 build clean して、 redo して、もう一回名前変更したら直った。
+
 
 # 参考
 https://qiita.com/blendthink/items/aa70b8b3106fb4e3555f

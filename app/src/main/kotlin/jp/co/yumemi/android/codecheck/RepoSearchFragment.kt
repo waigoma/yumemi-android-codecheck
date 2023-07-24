@@ -16,15 +16,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import jp.co.yumemi.android.codecheck.databinding.FragmentOneBinding
+import jp.co.yumemi.android.codecheck.databinding.RepoSearchFragmentBinding
 
-class OneFragment : Fragment(R.layout.fragment_one) {
+class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = FragmentOneBinding.bind(view)
-
+        val binding = RepoSearchFragmentBinding.bind(view)
         val viewModel = OneViewModel(requireContext())
 
         val layoutManager = LinearLayoutManager(requireContext())
@@ -56,8 +55,8 @@ class OneFragment : Fragment(R.layout.fragment_one) {
     }
 
     fun gotoRepositoryFragment(item: Item) {
-        val action = OneFragmentDirections
-            .actionRepositoriesFragmentToRepositoryFragment(item = item)
+        val action = RepoSearchFragmentDirections
+            .actionRepoSearchFragmentToRepoViewFragment(item = item)
         findNavController().navigate(action)
     }
 }

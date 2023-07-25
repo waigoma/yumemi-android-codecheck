@@ -30,7 +30,7 @@ class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {
         val dividerItemDecoration = DividerItemDecoration(requireContext(), layoutManager.orientation)
         val adapter = CustomAdapter(object : CustomAdapter.OnItemClickListener {
             override fun itemClick(item: Item) {
-                gotoRepositoryFragment(item)
+                gotoRepoViewFragment(item)
             }
         })
 
@@ -54,10 +54,10 @@ class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {
         }
     }
 
-    fun gotoRepositoryFragment(item: Item) {
-        val action = RepoSearchFragmentDirections
+    fun gotoRepoViewFragment(item: Item) {
+        val actionGotoRepoView = RepoSearchFragmentDirections
             .actionRepoSearchFragmentToRepoViewFragment(item = item)
-        findNavController().navigate(action)
+        findNavController().navigate(actionGotoRepoView)
     }
 }
 

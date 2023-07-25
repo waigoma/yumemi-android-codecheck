@@ -24,7 +24,7 @@ class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = RepoSearchFragmentBinding.bind(view)
-        val viewModel = OneViewModel(requireContext())
+        val viewModel = RepoViewModel(requireContext())
 
         val layoutManager = LinearLayoutManager(requireContext())
         val dividerItemDecoration = DividerItemDecoration(requireContext(), layoutManager.orientation)

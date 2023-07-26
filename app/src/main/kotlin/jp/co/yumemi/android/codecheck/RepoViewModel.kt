@@ -39,18 +39,30 @@ class RepoViewModel(
             }
 
             val jsonBody = JSONObject(response.receive<String>())
-
-            val jsonItems = jsonBody.optJSONArray("items")!!
-
+            val jsonItems = jsonBody.optJSONArray("items")
             val items = mutableListOf<Item>()
 
-            /**
-             * アイテムの個数分ループする
-             */
+            // 検索結果がない場合
+            if (jsonItems == null) {
+                items.add(
+                    Item(
+                        name = "検索結果がありません",
+                        ownerIconUrl = "",
+                        language = "",
+                        stargazersCount = 0,
+                        watchersCount = 0,
+                        forksCount = 0,
+                        openIssuesCount = 0,
+                    ),
+                )
+                return@async items.toList()
+            }
+
+            // 検索結果がある場合
             for (i in 0 until jsonItems.length()) {
-                val jsonItem = jsonItems.optJSONObject(i)!!
+                val jsonItem = jsonItems.optJSONObject(i)
                 val name = jsonItem.optString("full_name")
-                val ownerIconUrl = jsonItem.optJSONObject("owner")!!.optString("avatar_url")
+                val ownerIconUrl = jsonItem.optJSONObject("owner")?.optString("avatar_url") ?: "avatar_url がありません"
                 val language = jsonItem.optString("language")
                 val stargazersCount = jsonItem.optLong("stargazers_count")
                 val watchersCount = jsonItem.optLong("watchers_count")

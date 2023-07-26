@@ -16,8 +16,8 @@ class RepoViewFragment : Fragment(R.layout.repo_view_fragment) {
 
     private val args: RepoViewFragmentArgs by navArgs()
 
-    private var binding: RepoViewFragmentBinding? = null
-    private val _binding get() = binding!!
+    private lateinit var binding: RepoViewFragmentBinding
+    private val _binding get() = binding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

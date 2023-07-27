@@ -38,13 +38,23 @@ fragment ファイルの名前を変更し、それに対応する kt ファイ�
 
 
 # 参考
-https://qiita.com/blendthink/items/aa70b8b3106fb4e3555f
+* https://qiita.com/blendthink/items/aa70b8b3106fb4e3555f
 
 ## branch の運用
-https://qiita.com/c6tower/items/fe2aa4ecb78bef69928f
+* https://qiita.com/c6tower/items/fe2aa4ecb78bef69928f
+
+## pull request の運用
+* https://applis.io/posts/how-to-write-git-pull-request
+* https://notepm.jp/template/pull-request
 
 ## ktlint の導入
-https://pinterest.github.io/ktlint/0.50.0/
-https://qiita.com/takusemba/items/04c9ad7d28c4b91dc1a4
-https://qiita.com/hkusu/items/f1c55a0e0d03543b24d5
-https://atsum.in/android/ktlint/
+* https://pinterest.github.io/ktlint/0.50.0/
+* https://qiita.com/takusemba/items/04c9ad7d28c4b91dc1a4
+* https://qiita.com/hkusu/items/f1c55a0e0d03543b24d5
+* https://atsum.in/android/ktlint/
+
+## wildcard import を無効にする
+* https://stackoverflow.com/questions/67341957/how-do-i-disable-wildcard-imports-for-all-kotlin-files-in-android-studio/67341958#67341958
+
+## strings.xml の書式設定
+* https://developer.android.com/guide/topics/resources/string-resource?hl=ja#formatting-strings

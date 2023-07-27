@@ -24,7 +24,7 @@ class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = RepoSearchFragmentBinding.bind(view)
-        val viewModel = RepoViewModel(requireContext())
+        val viewModel = RepoViewModel()
 
         val layoutManager = LinearLayoutManager(requireContext())
         val dividerItemDecoration = DividerItemDecoration(requireContext(), layoutManager.orientation)
@@ -89,8 +89,8 @@ class CustomAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        (holder.itemView.findViewById<View>(R.id.repositoryNameView) as TextView).text =
-            item.name
+        val repoNameView = holder.itemView.findViewById<View>(R.id.repositoryNameView)
+        if (repoNameView is TextView) repoNameView.text = item.name
 
         holder.itemView.setOnClickListener {
             itemClickListener.itemClick(item)

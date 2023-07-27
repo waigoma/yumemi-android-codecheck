@@ -30,15 +30,15 @@ class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {
 
         binding.searchInputText
             .setOnEditorActionListener { editText, action, _ ->
-                if (action == EditorInfo.IME_ACTION_SEARCH) {
-                    editText.text.toString().let {
-                        viewModel.searchResults(it).apply {
-                            adapter.submitList(this)
-                        }
+                if (action != EditorInfo.IME_ACTION_SEARCH)
+                    return@setOnEditorActionListener false
+
+                editText.text.toString().let {
+                    viewModel.searchResults(it).apply {
+                        adapter.submitList(this)
                     }
-                    return@setOnEditorActionListener true
                 }
-                return@setOnEditorActionListener false
+                return@setOnEditorActionListener true
             }
 
         binding.recyclerView.also {

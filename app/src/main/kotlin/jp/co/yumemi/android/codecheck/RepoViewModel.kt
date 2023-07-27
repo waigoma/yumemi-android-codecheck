@@ -3,7 +3,6 @@
  */
 package jp.co.yumemi.android.codecheck
 
-import android.content.Context
 import android.os.Parcelable
 import androidx.lifecycle.ViewModel
 import io.ktor.client.HttpClient
@@ -24,9 +23,7 @@ import java.util.*
 /**
  * RepoViewFragment で使う
  */
-class RepoViewModel(
-    val context: Context,
-) : ViewModel() {
+class RepoViewModel : ViewModel() {
 
     // 検索結果
     fun searchResults(inputText: String): List<Item> = runBlocking {
@@ -73,7 +70,7 @@ class RepoViewModel(
                     Item(
                         name = name,
                         ownerIconUrl = ownerIconUrl,
-                        language = context.getString(R.string.written_language, language),
+                        language = language,
                         stargazersCount = stargazersCount,
                         watchersCount = watchersCount,
                         forksCount = forksCount,

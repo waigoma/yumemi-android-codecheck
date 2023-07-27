@@ -23,7 +23,7 @@ import java.util.*
 /**
  * RepoViewFragment で使う
  */
-class RepoViewModel : ViewModel() {
+class RepoSearchViewModel : ViewModel() {
 
     // 検索結果
     fun searchResults(inputText: String): List<Item> = runBlocking {

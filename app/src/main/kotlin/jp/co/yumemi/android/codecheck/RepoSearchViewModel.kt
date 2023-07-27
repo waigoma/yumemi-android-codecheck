@@ -37,10 +37,18 @@ class RepoSearchViewModel : ViewModel() {
             openIssuesCount = 0,
         ))
 
-    // 検索結果
+    /**
+     * 検索結果を Item のリストで返す
+     * @param inputText 検索する文字列
+     * @return 検索結果 Item のリスト
+     */
     fun searchResults(inputText: String): List<Item> = runBlocking {
-        if (inputText.isEmpty()) return@runBlocking nothingItem
+        lastSearchDate = Date()
 
+        if (inputText.isEmpty())
+            return@runBlocking nothingItem
+
+        // 検索結果を取得する
         val client = HttpClient(Android)
         viewModelScope.async(Dispatchers.IO) {
             try {
@@ -50,44 +58,49 @@ class RepoSearchViewModel : ViewModel() {
                         parameter("q", inputText)
                     }
 
-                val jsonBody = JSONObject(response.receive<String>())
-                val jsonItems = jsonBody.optJSONArray("items")
-                val items = mutableListOf<Item>()
-
-                // 検索結果がない場合
-                if (jsonItems == null) {
-                    return@async nothingItem
-                }
-
-                // 検索結果から Item を作成する
-                jsonItems.forEach {
-                    val name = it.optString("full_name")
-                    val ownerIconUrl = it.optJSONObject("owner")?.optString("avatar_url") ?: "avatar_url がありません"
-                    val language = it.optString("language")
-                    val stargazersCount = it.optLong("stargazers_count")
-                    val watchersCount = it.optLong("watchers_count")
-                    val forksCount = it.optLong("forks_conut")
-                    val openIssuesCount = it.optLong("open_issues_count")
-
-                    items.add(
-                        Item(
-                            name = name,
-                            ownerIconUrl = ownerIconUrl,
-                            language = language,
-                            stargazersCount = stargazersCount,
-                            watchersCount = watchersCount,
-                            forksCount = forksCount,
-                            openIssuesCount = openIssuesCount,
-                        ),
-                    )
-                }
-
-                lastSearchDate = Date()
-                return@async items.toList()
+                return@async parseResponse(JSONObject(response.receive<String>()))
             } catch (e: Exception) {
                 return@async nothingItem
             }
         }.await()
+    }
+
+    /**
+     * 検索結果をパースし Item のリストにする
+     * @param jsonBody 検索結果
+     * @return 検索結果を Item のリストにしたもの
+     */
+    private fun parseResponse(jsonBody: JSONObject): List<Item> {
+        val jsonItems = jsonBody.optJSONArray("items")
+        val items = mutableListOf<Item>()
+
+        if (jsonItems == null || jsonItems.length() == 0)
+            return nothingItem
+
+        // 検索結果から Item のリストを作成する
+        jsonItems.forEach {
+            val name = it.optString("full_name")
+            val ownerIconUrl = it.optJSONObject("owner")?.optString("avatar_url") ?: "avatar_url がありません"
+            val language = it.optString("language")
+            val stargazersCount = it.optLong("stargazers_count")
+            val watchersCount = it.optLong("watchers_count")
+            val forksCount = it.optLong("forks_conut")
+            val openIssuesCount = it.optLong("open_issues_count")
+
+            items.add(
+                Item(
+                    name = name,
+                    ownerIconUrl = ownerIconUrl,
+                    language = language,
+                    stargazersCount = stargazersCount,
+                    watchersCount = watchersCount,
+                    forksCount = forksCount,
+                    openIssuesCount = openIssuesCount,
+                ),
+            )
+        }
+
+        return items.toList()
     }
 
     /**

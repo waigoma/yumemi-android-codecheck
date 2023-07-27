@@ -12,6 +12,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.HttpResponse
+import jp.co.yumemi.android.codecheck.Item.Companion.NOTHING_ITEM_NAME
 import jp.co.yumemi.android.codecheck.MainActivity.Companion.lastSearchDate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -35,7 +36,7 @@ class RepoSearchViewModel : ViewModel() {
     // 検索結果がないときに表示する Item
     private val nothingItem = listOf(
         Item(
-            name = "検索結果がありません",
+            name = NOTHING_ITEM_NAME,
             ownerIconUrl = "",
             language = "",
             stargazersCount = 0,

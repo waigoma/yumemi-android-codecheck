@@ -1,3 +1,6 @@
+/*
+ * Copyright © 2021 YUMEMI Inc. All rights reserved.
+ */
 package jp.co.yumemi.android.codecheck
 
 import android.view.LayoutInflater
@@ -37,7 +40,13 @@ class RepoItemAdapter (
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         val repoNameView = holder.itemView.findViewById<View>(R.id.repositoryNameView)
-        if (repoNameView is TextView) repoNameView.text = item.name
+
+        if (repoNameView is TextView)
+            repoNameView.text = item.name
+
+        // 何もない場合はクリックイベントを発生させない
+        if (item.name == Item.NOTHING_ITEM_NAME)
+            return
 
         holder.itemView.setOnClickListener {
             itemClickListener.itemClick(item)

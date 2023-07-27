@@ -1,3 +1,6 @@
+/*
+ * Copyright © 2021 YUMEMI Inc. All rights reserved.
+ */
 package jp.co.yumemi.android.codecheck
 
 import android.os.Parcelable
@@ -22,4 +25,8 @@ data class Item(
     val watchersCount: Long,
     val forksCount: Long,
     val openIssuesCount: Long,
-) : Parcelable
+) : Parcelable {
+    companion object {
+        const val NOTHING_ITEM_NAME = "検索結果がありません"
+    }
+}

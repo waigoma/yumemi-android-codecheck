@@ -3,7 +3,6 @@
  */
 package jp.co.yumemi.android.codecheck
 
-import android.os.Parcelable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.ktor.client.HttpClient
@@ -17,13 +16,12 @@ import jp.co.yumemi.android.codecheck.MainActivity.Companion.lastSearchDate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
-import kotlinx.parcelize.Parcelize
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*
 
 /**
- * RepoViewFragment で使う
+ * Repository 検索の ViewModel
  */
 class RepoSearchViewModel : ViewModel() {
     companion object {
@@ -34,6 +32,7 @@ class RepoSearchViewModel : ViewModel() {
         private const val PARAMETER_Q = "q"
     }
 
+    // 検索結果がないときに表示する Item
     private val nothingItem = listOf(
         Item(
             name = "検索結果がありません",
@@ -120,14 +119,3 @@ class RepoSearchViewModel : ViewModel() {
         }
     }
 }
-
-@Parcelize
-data class Item(
-    val name: String,
-    val ownerIconUrl: String,
-    val language: String,
-    val stargazersCount: Long,
-    val watchersCount: Long,
-    val forksCount: Long,
-    val openIssuesCount: Long,
-) : Parcelable

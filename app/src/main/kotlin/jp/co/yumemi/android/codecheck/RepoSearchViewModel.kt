@@ -26,6 +26,14 @@ import java.util.*
  * RepoViewFragment で使う
  */
 class RepoSearchViewModel : ViewModel() {
+    companion object {
+        // GitHub API の URL
+        private const val API_URL = "https://api.github.com/search/repositories"
+        private const val HEADER_ACCEPT = "Accept"
+        private const val HEADER_ACCEPT_VALUE = "application/vnd.github.v3+json"
+        private const val PARAMETER_Q = "q"
+    }
+
     private val nothingItem = listOf(
         Item(
             name = "検索結果がありません",
@@ -53,9 +61,9 @@ class RepoSearchViewModel : ViewModel() {
         viewModelScope.async(Dispatchers.IO) {
             try {
                 val response: HttpResponse =
-                    client.get("https://api.github.com/search/repositories") {
-                        header("Accept", "application/vnd.github.v3+json")
-                        parameter("q", inputText)
+                    client.get(API_URL) {
+                        header(HEADER_ACCEPT, HEADER_ACCEPT_VALUE)
+                        parameter(PARAMETER_Q, inputText)
                     }
 
                 return@async parseResponse(JSONObject(response.receive<String>()))

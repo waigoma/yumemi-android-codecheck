@@ -5,7 +5,6 @@ package jp.co.yumemi.android.codecheck.fragment
 
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yumemi.android.codecheck.model.Item
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.model.RepoItemAdapter
-import jp.co.yumemi.android.codecheck.RepoSearchFragmentDirections
 import jp.co.yumemi.android.codecheck.api.RepoSearchViewModel
 import jp.co.yumemi.android.codecheck.databinding.RepoSearchFragmentBinding
 
@@ -35,16 +33,7 @@ class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {
 
         binding.searchInputText
             .setOnEditorActionListener { editText, action, _ ->
-                if (action != EditorInfo.IME_ACTION_SEARCH) {
-                    return@setOnEditorActionListener false
-                }
-
-                editText.text.toString().let {
-                    viewModel.searchResults(it).apply {
-                        adapter.submitList(this)
-                    }
-                }
-                return@setOnEditorActionListener true
+                viewModel.onEditorActionListener(editText, action, adapter)
             }
 
         binding.recyclerView.also {

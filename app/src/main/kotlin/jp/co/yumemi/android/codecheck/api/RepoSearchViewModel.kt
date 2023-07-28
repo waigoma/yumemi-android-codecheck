@@ -3,6 +3,8 @@
  */
 package jp.co.yumemi.android.codecheck.api
 
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.ktor.client.HttpClient
@@ -15,6 +17,7 @@ import io.ktor.client.statement.HttpResponse
 import jp.co.yumemi.android.codecheck.model.Item
 import jp.co.yumemi.android.codecheck.model.Item.Companion.NOTHING_ITEM_NAME
 import jp.co.yumemi.android.codecheck.MainActivity.Companion.lastSearchDate
+import jp.co.yumemi.android.codecheck.model.RepoItemAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
@@ -46,6 +49,19 @@ class RepoSearchViewModel : ViewModel() {
             openIssuesCount = 0,
         ),
     )
+
+    fun onEditorActionListener(editText: TextView, action: Int, adapter: RepoItemAdapter): Boolean {
+        if (action != EditorInfo.IME_ACTION_SEARCH) {
+            return false
+        }
+
+        editText.text.toString().let {
+            searchResults(it).apply {
+                adapter.submitList(this)
+            }
+        }
+        return true
+    }
 
     /**
      * 検索結果を Item のリストで返す

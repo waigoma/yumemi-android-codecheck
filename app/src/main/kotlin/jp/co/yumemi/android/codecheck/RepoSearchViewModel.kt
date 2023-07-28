@@ -43,7 +43,8 @@ class RepoSearchViewModel : ViewModel() {
             watchersCount = 0,
             forksCount = 0,
             openIssuesCount = 0,
-        ))
+        ),
+    )
 
     /**
      * 検索結果を Item のリストで返す
@@ -53,8 +54,9 @@ class RepoSearchViewModel : ViewModel() {
     fun searchResults(inputText: String): List<Item> = runBlocking {
         lastSearchDate = Date()
 
-        if (inputText.isEmpty())
+        if (inputText.isEmpty()) {
             return@runBlocking nothingItem
+        }
 
         // 検索結果を取得する
         val client = HttpClient(Android)
@@ -82,8 +84,9 @@ class RepoSearchViewModel : ViewModel() {
         val jsonItems = jsonBody.optJSONArray("items")
         val items = mutableListOf<Item>()
 
-        if (jsonItems == null || jsonItems.length() == 0)
+        if (jsonItems == null || jsonItems.length() == 0) {
             return nothingItem
+        }
 
         // 検索結果から Item のリストを作成する
         jsonItems.forEach {

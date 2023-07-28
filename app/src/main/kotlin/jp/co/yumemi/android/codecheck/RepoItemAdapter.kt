@@ -21,7 +21,7 @@ private val diff_util = object : DiffUtil.ItemCallback<Item>() {
     }
 }
 
-class RepoItemAdapter (
+class RepoItemAdapter(
     private val itemClickListener: OnItemClickListener,
 ) : ListAdapter<Item, RepoItemAdapter.ViewHolder>(diff_util) {
 
@@ -41,12 +41,14 @@ class RepoItemAdapter (
         val item = getItem(position)
         val repoNameView = holder.itemView.findViewById<View>(R.id.repositoryNameView)
 
-        if (repoNameView is TextView)
+        if (repoNameView is TextView) {
             repoNameView.text = item.name
+        }
 
         // 何もない場合はクリックイベントを発生させない
-        if (item.name == Item.NOTHING_ITEM_NAME)
+        if (item.name == Item.NOTHING_ITEM_NAME) {
             return
+        }
 
         holder.itemView.setOnClickListener {
             itemClickListener.itemClick(item)

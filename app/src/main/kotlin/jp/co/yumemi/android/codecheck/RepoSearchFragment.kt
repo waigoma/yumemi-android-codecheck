@@ -30,8 +30,9 @@ class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {
 
         binding.searchInputText
             .setOnEditorActionListener { editText, action, _ ->
-                if (action != EditorInfo.IME_ACTION_SEARCH)
+                if (action != EditorInfo.IME_ACTION_SEARCH) {
                     return@setOnEditorActionListener false
+                }
 
                 editText.text.toString().let {
                     viewModel.searchResults(it).apply {
@@ -54,4 +55,3 @@ class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {
         findNavController().navigate(actionGotoRepoView)
     }
 }
-

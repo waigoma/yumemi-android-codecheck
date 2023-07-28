@@ -40,7 +40,6 @@ class RepoSearch {
      * @return 検索結果 Item のリスト
      */
     fun results(inputText: String): List<Item> = runBlocking {
-
         if (inputText.isEmpty()) {
             return@runBlocking nothingItem
         }

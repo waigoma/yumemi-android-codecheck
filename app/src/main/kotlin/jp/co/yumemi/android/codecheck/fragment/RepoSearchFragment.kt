@@ -36,6 +36,7 @@ class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {
                 viewModel.onEditorActionListener(editText, action, adapter)
             }
 
+        // recyclerView の設定
         binding.recyclerView.also {
             it.layoutManager = layoutManager
             it.addItemDecoration(dividerItemDecoration)
@@ -43,6 +44,10 @@ class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {
         }
     }
 
+    /**
+     * リポジトリ詳細画面へ遷移する
+     * @param item Item
+     */
     fun gotoRepoViewFragment(item: Item) {
         val actionGotoRepoView =
             RepoSearchFragmentDirections.actionRepoSearchFragmentToRepoViewFragment(item = item)

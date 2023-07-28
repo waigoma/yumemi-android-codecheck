@@ -1,7 +1,7 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.codecheck
+package jp.co.yumemi.android.codecheck.api
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +12,8 @@ import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.HttpResponse
-import jp.co.yumemi.android.codecheck.Item.Companion.NOTHING_ITEM_NAME
+import jp.co.yumemi.android.codecheck.model.Item
+import jp.co.yumemi.android.codecheck.model.Item.Companion.NOTHING_ITEM_NAME
 import jp.co.yumemi.android.codecheck.MainActivity.Companion.lastSearchDate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

@@ -48,6 +48,18 @@ $ rm -rf android-engineer-codecheck.git
 $ git clone https://github.com/waigoma/yumemi-android-codecheck
 ```
 
+## プロジェクトの構成
+### api (API 通信を行うためのクラス)
+* GitHub API を叩くコードが書かれている
+
+### fragment (画面を構成する Fragment)
+* RepoSearchFragment: リポジトリ検索画面 (初期画面)
+* RepoDetailFragment: リポジトリ詳細画面
+
+### model (データクラス)
+* GitHub API から取得したデータを格納するデータクラスが書かれている
+
+
 ## 開発方法
 1. `main` branch から開発の branch `develop` を切る。
 2. `develop` branch から開発の branch `feature/xxx` を切る。 (branch の規則は以下参照)

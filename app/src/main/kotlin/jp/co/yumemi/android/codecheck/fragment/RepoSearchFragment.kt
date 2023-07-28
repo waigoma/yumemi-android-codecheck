@@ -1,7 +1,7 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.codecheck
+package jp.co.yumemi.android.codecheck.fragment
 
 import android.os.Bundle
 import android.view.View
@@ -10,6 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import jp.co.yumemi.android.codecheck.model.Item
+import jp.co.yumemi.android.codecheck.R
+import jp.co.yumemi.android.codecheck.model.RepoItemAdapter
+import jp.co.yumemi.android.codecheck.RepoSearchFragmentDirections
+import jp.co.yumemi.android.codecheck.api.RepoSearchViewModel
 import jp.co.yumemi.android.codecheck.databinding.RepoSearchFragmentBinding
 
 class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {
@@ -50,8 +55,8 @@ class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {
     }
 
     fun gotoRepoViewFragment(item: Item) {
-        val actionGotoRepoView = RepoSearchFragmentDirections
-            .actionRepoSearchFragmentToRepoViewFragment(item = item)
+        val actionGotoRepoView =
+            RepoSearchFragmentDirections.actionRepoSearchFragmentToRepoViewFragment(item = item)
         findNavController().navigate(actionGotoRepoView)
     }
 }

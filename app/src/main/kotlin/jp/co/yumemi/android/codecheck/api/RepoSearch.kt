@@ -1,10 +1,5 @@
-/*
- * Copyright © 2021 YUMEMI Inc. All rights reserved.
- */
 package jp.co.yumemi.android.codecheck.api
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import io.ktor.client.HttpClient
 import io.ktor.client.call.receive
 import io.ktor.client.engine.android.Android
@@ -13,19 +8,11 @@ import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.HttpResponse
 import jp.co.yumemi.android.codecheck.model.Item
-import jp.co.yumemi.android.codecheck.model.Item.Companion.NOTHING_ITEM_NAME
-import jp.co.yumemi.android.codecheck.MainActivity.Companion.lastSearchDate
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.json.JSONArray
 import org.json.JSONObject
-import java.util.*
 
-/**
- * Repository 検索の ViewModel
- */
-class RepoSearchViewModel : ViewModel() {
+class RepoSearch {
     companion object {
         // GitHub API の URL
         private const val API_URL = "https://api.github.com/search/repositories"
@@ -37,7 +24,7 @@ class RepoSearchViewModel : ViewModel() {
     // 検索結果がないときに表示する Item
     private val nothingItem = listOf(
         Item(
-            name = NOTHING_ITEM_NAME,
+            name = Item.NOTHING_ITEM_NAME,
             ownerIconUrl = "",
             language = "",
             stargazersCount = 0,
@@ -52,28 +39,25 @@ class RepoSearchViewModel : ViewModel() {
      * @param inputText 検索する文字列
      * @return 検索結果 Item のリスト
      */
-    fun searchResults(inputText: String): List<Item> = runBlocking {
-        lastSearchDate = Date()
-
+    fun results(inputText: String): List<Item> = runBlocking {
         if (inputText.isEmpty()) {
             return@runBlocking nothingItem
         }
 
         // 検索結果を取得する
         val client = HttpClient(Android)
-        viewModelScope.async(Dispatchers.IO) {
-            try {
-                val response: HttpResponse =
-                    client.get(API_URL) {
-                        header(HEADER_ACCEPT, HEADER_ACCEPT_VALUE)
-                        parameter(PARAMETER_Q, inputText)
-                    }
+        return@runBlocking try {
+            // 検索結果を取得する
+            val response: HttpResponse =
+                client.get(API_URL) {
+                    header(HEADER_ACCEPT, HEADER_ACCEPT_VALUE)
+                    parameter(PARAMETER_Q, inputText)
+                }
 
-                return@async parseResponse(JSONObject(response.receive<String>()))
-            } catch (e: Exception) {
-                return@async nothingItem
-            }
-        }.await()
+            parseResponse(JSONObject(response.receive<String>()))
+        } catch (e: Exception) {
+            nothingItem
+        }
     }
 
     /**
@@ -91,6 +75,7 @@ class RepoSearchViewModel : ViewModel() {
 
         // 検索結果から Item のリストを作成する
         jsonItems.forEach {
+            // json の parse
             val name = it.optString("full_name")
             val ownerIconUrl = it.optJSONObject("owner")?.optString("avatar_url") ?: "avatar_url がありません"
             val language = it.optString("language")
@@ -99,6 +84,7 @@ class RepoSearchViewModel : ViewModel() {
             val forksCount = it.optLong("forks_conut")
             val openIssuesCount = it.optLong("open_issues_count")
 
+            // Item のリストに追加
             items.add(
                 Item(
                     name = name,

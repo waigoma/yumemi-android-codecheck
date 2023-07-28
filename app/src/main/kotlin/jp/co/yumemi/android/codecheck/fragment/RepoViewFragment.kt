@@ -11,7 +11,6 @@ import androidx.navigation.fragment.navArgs
 import coil.load
 import jp.co.yumemi.android.codecheck.MainActivity.Companion.lastSearchDate
 import jp.co.yumemi.android.codecheck.R
-import jp.co.yumemi.android.codecheck.RepoViewFragmentArgs
 import jp.co.yumemi.android.codecheck.databinding.RepoViewFragmentBinding
 
 class RepoViewFragment : Fragment(R.layout.repo_view_fragment) {

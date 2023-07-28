@@ -5,17 +5,15 @@ package jp.co.yumemi.android.codecheck.fragment
 
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import jp.co.yumemi.android.codecheck.model.Item
 import jp.co.yumemi.android.codecheck.R
-import jp.co.yumemi.android.codecheck.model.RepoItemAdapter
-import jp.co.yumemi.android.codecheck.RepoSearchFragmentDirections
-import jp.co.yumemi.android.codecheck.api.RepoSearchViewModel
 import jp.co.yumemi.android.codecheck.databinding.RepoSearchFragmentBinding
+import jp.co.yumemi.android.codecheck.model.Item
+import jp.co.yumemi.android.codecheck.model.RepoItemAdapter
+import jp.co.yumemi.android.codecheck.viewmodel.RepoSearchViewModel
 
 class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {
 
@@ -35,18 +33,10 @@ class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {
 
         binding.searchInputText
             .setOnEditorActionListener { editText, action, _ ->
-                if (action != EditorInfo.IME_ACTION_SEARCH) {
-                    return@setOnEditorActionListener false
-                }
-
-                editText.text.toString().let {
-                    viewModel.searchResults(it).apply {
-                        adapter.submitList(this)
-                    }
-                }
-                return@setOnEditorActionListener true
+                viewModel.onEditorActionListener(editText, action, adapter)
             }
 
+        // recyclerView の設定
         binding.recyclerView.also {
             it.layoutManager = layoutManager
             it.addItemDecoration(dividerItemDecoration)
@@ -54,6 +44,10 @@ class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {
         }
     }
 
+    /**
+     * リポジトリ詳細画面へ遷移する
+     * @param item Item
+     */
     fun gotoRepoViewFragment(item: Item) {
         val actionGotoRepoView =
             RepoSearchFragmentDirections.actionRepoSearchFragmentToRepoViewFragment(item = item)

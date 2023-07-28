@@ -43,6 +43,9 @@ fragment ファイルの名前を変更し、それに対応する kt ファイ�
 ## branch の運用
 * https://qiita.com/c6tower/items/fe2aa4ecb78bef69928f
 
+### pull request の merge ミスを直す
+* https://qiita.com/ponsuke0531/items/5e15f74f9d5dfca4e7b2
+
 ## pull request の運用
 * https://applis.io/posts/how-to-write-git-pull-request
 * https://notepm.jp/template/pull-request
@@ -61,3 +64,13 @@ fragment ファイルの名前を変更し、それに対応する kt ファイ�
 
 ## strings.xml の書式設定
 * https://developer.android.com/guide/topics/resources/string-resource?hl=ja#formatting-strings
+
+## アーキテクチャー設計
+* https://www.wantedly.com/companies/progrit/post_articles/474355
+
+## android coroutine
+* https://developer.android.com/kotlin/coroutines?hl=ja
+
+## dark mode
+* https://qiita.com/aiko_han/items/c742c1a62cb38f9232c8
+

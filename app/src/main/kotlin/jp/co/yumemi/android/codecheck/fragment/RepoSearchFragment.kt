@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yumemi.android.codecheck.model.Item
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.model.RepoItemAdapter
-import jp.co.yumemi.android.codecheck.api.RepoSearchViewModel
+import jp.co.yumemi.android.codecheck.viewmodel.RepoSearchViewModel
 import jp.co.yumemi.android.codecheck.databinding.RepoSearchFragmentBinding
 
 class RepoSearchFragment : Fragment(R.layout.repo_search_fragment) {

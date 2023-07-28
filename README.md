@@ -56,6 +56,9 @@ $ git clone https://github.com/waigoma/yumemi-android-codecheck
 * RepoSearchFragment: リポジトリ検索画面 (初期画面)
 * RepoDetailFragment: リポジトリ詳細画面
 
+### viewmodel (画面の状態を管理する ViewModel)
+* RepoSearchViewModel: リポジトリ検索画面の状態を管理する ViewModel
+
 ### model (データクラス)
 * GitHub API から取得したデータを格納するデータクラスが書かれている
 

@@ -53,6 +53,9 @@ fragment ファイルの名前を変更し、それに対応する kt ファイ�
 * https://qiita.com/hkusu/items/f1c55a0e0d03543b24d5
 * https://atsum.in/android/ktlint/
 
+### ktlint を GitHub Actions で実行する
+* https://qiita.com/omix222/items/42cde8dfd83c32cfd4ca
+
 ## wildcard import を無効にする
 * https://stackoverflow.com/questions/67341957/how-do-i-disable-wildcard-imports-for-all-kotlin-files-in-android-studio/67341958#67341958
 

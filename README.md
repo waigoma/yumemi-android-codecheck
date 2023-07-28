@@ -48,3 +48,19 @@ $ rm -rf android-engineer-codecheck.git
 $ git clone https://github.com/waigoma/yumemi-android-codecheck
 ```
 
+## 開発方法
+1. `main` branch から開発の branch `develop` を切る。
+2. `develop` branch から開発の branch `feature/xxx` を切る。 (branch の規則は以下参照)
+3. `feature/xxx` branch で開発を行う。
+4. 開発が終わったら、`feature/xxx` branch を `develop` branch に pull request する。
+5. `develop` branch で動作確認を行い、問題なければ `main` branch に pull request する。
+6. `main` branch で動作確認を行い、問題なければ `main` branch に merge する。
+
+## branch の規則
+- `feature/xxx` : 機能追加の branch
+- `fix/xxx` : バグ修正の branch
+
+## commit の規則
+- 英語日本語指定なし
+- 何をしたかをわかりやすく端的に記述する
+- コミットの粒度をなるべく細かくする
